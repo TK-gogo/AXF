@@ -1,0 +1,132 @@
+{% extends 'base_main.html' %}
+
+{% load static %}
+
+{% block extCSS %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'app/market/market.css' %}">
+{% endblock %}
+
+{% block header %}
+    <header>
+        <div style="text-align: center;font-size: large;margin: auto">
+            闪购
+        </div>
+    </header>
+{% endblock %}
+
+{% block extJS %}
+    <script src="{% static 'app/market/market.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <div id="market">
+
+        <aside>
+            <ul>
+                {% for food_type in food_types %}
+                    <li>
+                        <a href="{% url 'axf:market' food_type.typeid '0' '0' %}">
+                            <span>{{ food_type.typename }}</span>
+                        </a>
+                        {% if typeid == food_type.typeid %}
+                            <span class="yellowSlide"></span>
+                        {% endif %}
+
+                    </li>
+                {% endfor %}
+
+            </ul>
+        </aside>
+
+        <nav>
+            <ul>
+                <li id="all_type">
+
+                    <span>全部类型<span id="all_type_icon" class="glyphicon glyphicon-chevron-down"></span></span>
+
+                </li>
+
+                <li id="sort_type">
+                    <span>综合排序<span id="sort_type_icon" class="glyphicon glyphicon-chevron-down"></span></span>
+
+                </li>
+
+            </ul>
+        </nav>
+    
+        <section>
+            <menu>
+                <ul>
+                    {% for good in goods %}
+                        <li>
+                            <a href="">
+                                <img src="{{ good.productimg }}" alt="">
+                                <div class="shoppingInfo">
+                                    <h6>{{ good.productlongname }}</h6>
+                                    <div class="detailTag">
+                                        <span>精选</span>
+                                    </div>
+                                    <div class="unit">{{ good.specifics }}</div>
+                                    <div class="price">
+                                        <span>{{ good.price }}</span>
+                                        <s>{{ good.marketprice }}</s>
+                                    </div>
+
+                                </div>
+                            </a>
+
+                            <section>
+                                <button class="sub">-</button>
+                                <span class="num">1</span>
+                                <button class="add">+</button>
+                            </section>
+
+                            <button goodsid='{{ good.id }}' class='addtocart'>添加到购物车</button>
+                        </li>
+                    {% endfor %}
+                    
+                </ul>
+
+
+                <div id="all_type_container">
+                    <div>
+                        {% for child_type in child_type_list %}
+                            <a href="{% url 'axf:market' typeid child_type.1 '0' %}">
+                                <button>{{ child_type.0 }}</button>
+                            </a>
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+
+                <div id="sort_type_container">
+                    <div>
+                        <a href="{% url 'axf:market' typeid child_type_id '0' %}">
+                            <button>综合排序</button>
+                        </a>
+                        <a href="{% url 'axf:market' typeid child_type_id '1' %}">
+                            <button>销量排序</button>
+                        </a>
+                        <a href="{% url 'axf:market' typeid child_type_id '2' %}">
+                            <button>价格降序</button>
+                        </a>
+                        <a href="{% url 'axf:market' typeid child_type_id '3' %}">
+                            <button>价格升序</button>
+                        </a>
+                    </div>
+                </div>
+
+
+            </menu>
+
+
+
+        </section>
+
+
+
+    </div>
+{% endblock %}

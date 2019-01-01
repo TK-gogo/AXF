@@ -1,0 +1,142 @@
+{% extends 'base_main.html' %}
+
+{% load static %}
+
+{% block extCSS %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'app/mine/mine.css' %}">
+{% endblock %}
+
+{% block header %}
+    <header>
+        <div style="text-align: center;font-size: large;margin: auto">
+            我的
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <menu id="mine">
+        <div class="fixed">
+
+
+            {% if icon %}
+                <span><img class="u_icon" src="{% static icon %}" alt=""></span>
+            {% else %}
+                <span class="glyphicon glyphicon-user"></span>
+            {% endif %}
+
+
+            {% if username %}
+                {{ username }} <a href="{% url 'axf:logout' %}">注销</a>
+            {% else %}
+                <a href="{% url 'axf:login' %}" style="font-size: larger">登录</a>
+            {% endif %}
+
+
+            <p><span class="glyphicon glyphicon-fire"></span><span>等级</span></p>
+            <div id="regis"><a href="{% url 'axf:register' %}">注册</a></div>
+            <p><span class="glyphicon glyphicon-heart"></span><span>收藏</span></p>
+
+        </div>
+
+        <menu class="mine">
+            <p>
+                我的订单
+                <a href="">更多&gt;</a>
+            </p>
+            <div id="nav">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-usd"></span></dt>
+                                <dd>待付款</dd>
+                            </dl>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-envelope"></span></dt>
+                                <dd>待收货</dd>
+                            </dl>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-pencil"></span></dt>
+                                <dd>待评价</dd>
+                            </dl>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-retweet"></span></dt>
+                                <dd>退款/售后</dd>
+                            </dl>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <menu>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-envelope"></span></dt>
+                                <dd>积分商城</dd>
+                            </dl>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-credit-card"></span></dt>
+                                <dd>优惠券</dd>
+                            </dl>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-import"></span></dt>
+                                <dd>收货地址</dd>
+                            </dl>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-phone"></span></dt>
+                                <dd>客户反馈</dd>
+                            </dl>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-certificate"></span></dt>
+                                <dd>关于我们</dd>
+                            </dl>
+                        </a>
+                    </li>
+                </ul>
+            </menu>
+
+        </menu>
+
+
+    </menu>
+{% endblock %}
